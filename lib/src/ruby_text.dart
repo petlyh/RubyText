@@ -5,9 +5,10 @@ import 'package:tuple/tuple.dart';
 import 'ruby_text_data.dart';
 
 class RubySpanWidget extends HookWidget {
-  const RubySpanWidget(this.data, {Key? key}) : super(key: key);
+  const RubySpanWidget(this.data, {Key? key, this.rubyAlign}) : super(key: key);
 
   final RubyTextData data;
+  final CrossAxisAlignment? rubyAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +103,7 @@ class RubySpanWidget extends HookWidget {
     );
 
     return Column(
+      crossAxisAlignment: rubyAlign ?? CrossAxisAlignment.center,
       children: texts,
     );
   }
@@ -119,6 +121,7 @@ class RubyText extends StatelessWidget {
     this.softWrap,
     this.overflow,
     this.maxLines,
+    this.rubyAlign,
   }) : super(key: key);
 
   final List<RubyTextData> data;
@@ -130,6 +133,7 @@ class RubyText extends StatelessWidget {
   final bool? softWrap;
   final TextOverflow? overflow;
   final int? maxLines;
+  final CrossAxisAlignment? rubyAlign;
 
   @override
   Widget build(BuildContext context) => Text.rich(
@@ -143,6 +147,7 @@ class RubyText extends StatelessWidget {
                       rubyStyle: rubyStyle,
                       textDirection: textDirection,
                     ),
+                    rubyAlign: rubyAlign,
                   ),
                 ),
               )
